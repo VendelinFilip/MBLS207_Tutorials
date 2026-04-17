@@ -1,5 +1,5 @@
 # Tutorial 2 Introduction to the Command line
-# MBLS207 - Bioninformatics
+# MBLS207 - Bioinformatics
 
 ## 1. Introduction 
 
