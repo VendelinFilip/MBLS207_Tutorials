@@ -1,0 +1,60 @@
+# Tutorial 2 Introduction to the Command line
+# MBLS207 - Bioninformatics
+
+## 1. Introduction 
+
+In this tutorial you will get familiar with a different way to interact with your computer: through the command line.
+
+**Note**
+
+Go through the text and follow the instructions. You are encouraged to work in small groups during the tutorial. Be careful with typing. We recommend not copy-pasting from this website: sometimes symbols or fonts will not copy well, and the command line will only interpret exactly the text you submit.
+
+**Setting up the environment and example files**
+
+If you don’t have it yet, first create a folder called `MBLS207`.
+- If you are doing this with **Mac**, feel free to create it in your favourite computer location. We recommend doing this in a high-level folder (as opposed to deeply nested), such as in your Desktop.
+- From **Windows**, if you are accessing through the Ubuntu app, you should be able to see your Linux filesystem at the bottom side of the left column within Explorer – click there and create the folder within your Linux home (`/home/<your-username>`).
+Within `MBLS207`, create a folder called `Tutorial2`.
+
+Now, download from Blackboard the file called “example_files” and unzip it here. From now on, before opening an example file, copy that file to the `sandbox` folder.
+
+**Accessing and setting up the terminal**
+
+Depending on your operating system you may have to make your computer ready to use the command line. Certain parts of the tutorial are different for different operating systems.
+
+**Linux**
+
+Your computer is also ready to go. The paths mentioned in the tutorial will be slightly different on your machine.
+
+**MacOS**
+
+Your computer is ready to go. Find the `Terminal` program and launch it. If you don’t have a link on your Desktop or Dock yet, we suggest creating one.
+
+**Windows**
+
+You can install Ubuntu as an app inside of Windows. Go to the Windows store, search for Ubuntu 22.04 and install it. Try to open the app to see if it works (it shouldn’t contain any errors).
+In some cases, you need to change some settings to get it working. Try to follow these instructions:
+
+<https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-thelinux-kernel-update-package>
+
+An alternative option is to install a virtual machine. You can follow these instructions:
+
+<https://dev.to/florianfelsing/how-to-run-an-ubuntu-vm-on-windows-11-4oef>.
+
+You can install Ubuntu 20.04 or 22.04
+
+## 2. Starting the shell and getting oriented
+### 2.1. Starting your terminal session
+On Windows, launch the `Ubuntu` app, which will open the `Ubuntu` terminal. On Linux/Mac, open the `Terminal` app.
+
+A new session will start, and the opened window displays a greeting on the first line and a prompt and cursor on the second line (Figure 1). A prompt is a sign on a computer screen that shows that the computer is ready for you to type something. The prompt will probably contain the name of your machine, the name of the current directory (‘~’, you will learn more on that later) and your username. The command line, as the prompt and cursor are known, is displayed within the terminal window by a program called a **shell**. Shells are customizable and powerful – and at times they can seem frustratingly simple-minded. You can issue short commands or write simple scripts that do amazing things, but you can also wipe out a chunk of your hard disk with a few ill-chosen punctuation marks. The shell assumes that you mean what you say, and rarely gives you the chance to opt out of a command you issue or to undo the results.
+
+There are many different shell programs, but the most widely used is `bash`, which will also be used in the course.
+
+It’s time to try your first command. To check that you are set up to use the bash shell, at the prompt in the open terminal window type the following:
+>echo $SHELL
+
+The terminal will respond by printing out the name of the active shell, which should be `/bin/bash`. If the active shell is not `bash` but for example `zsh`, which is the default shell on the latest macOS versions, try the following command to make bash the default shell:
+>chsh -s /bin/bash
+
+
