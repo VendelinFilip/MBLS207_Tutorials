@@ -64,8 +64,72 @@ The terminal will respond by printing out the name of the active shell, which sh
 To end your session, type `exit`. You can just close the window, but this is a bit like unplugging your computer without turning it off first: if there are any programs still running in the terminal window, they will come unceremoniously to a halt. Closing the window is also not an option when you log in to a different computer from within your terminal.
 
 ## 3. Navigating your computer from the shell
-### Listing files with `ls` and figuring out where you are with `pwd`
+### 3.1. Listing files with `ls` and figuring out where you are with `pwd`
 As mentioned above, the prompt shows you the directory that is currently your perspective of the **filesystem** from the command line (Figure 2). This is also called the **working directory**. Each time you open a new terminal window, you are logging onto the Unix system of your computer anew. You will be located in what is called your home directory (~). You are now viewing the filesystem from this directory. To specify a different location, we must provide the **path** of that location. A path can be absolute or relative. The **absolute path** is a complete and unambiguous description of where something is in relation to the **root directory** (/), the very base of the filesystem. In contrast, a **relative path** describes where a folder or file is in relation to our working directory.
 
 The first command you will learn, and one you’ll use frequently, is ls (short for list). It prints out a list of files and directories contained within the working directory, or a specified directory.
+
+![](../images/mbls207_tutorial2_2.png "Figure 2. A portion of the Unix filesystem structure in tree format. Folders (also called directories) are in green, files (also called documents) are in maroon, and Unix programs (also called commands) are in grey. The root directory is on the far left.")
+**Figure 2. A portion of the Unix filesystem structure in tree format.** Folders (also called directories) are in green, files (also called documents) are in maroon, and Unix programs (also called commands) are in grey. The root directory is on the far left.
+
+**MacOS and Linux (for Windows go to next paragraph)**
+
+For comparison, open Finder (Mac) or the Linux equivalent and navigate to your home folder (Mac: `Go` → `Home` or `Shift+⌘+H` keyboard shortcut), so you can see its content. Now do the same by typing the command ls in your terminal window and compare the output with what you see in the familiar `Finder`. You should see the same folders and files in both. If you have set your computer to a different language than English, you will see the translated names in the GUI, but not in the terminal.
+
+In the following examples, the bold characters are what you type, and the regular characters are what the system prints, and we may or may not show the prompt that begins each line. In place of `lucy` you’ll see your own username, and you will also see a different host name at the beginning of the line. This is your network identity, created when you first set up an account on your computer.
+
+To see the contents of the `Desktop` folder while sitting in your home directory, type:
+>host:~ lucy$ **ls Desktop**
+or with the default Linux prompt:
+>lucy@host:~$ **ls Desktop**
+
+From now on the Linux prompt will only be shown too if the command is different. Without anything before `Desktop`, `ls` expects that `Desktop` is a directory within the working directory. This is a relative path to `Desktop`, because it is in relation to where you are now. Upon executing the command, you should see a list of whatever files are stored on your `Desktop` at the moment.
+
+To see the absolute path of the working directory, use the command `pwd` (`p`rint `w`orking `d`irectory):
+>host:~ lucy$ **pwd**
+
+>/Users/lucy
+
+On a Linux system you will see `/home/lucy` instead. Since you haven’t moved anywhere since starting the shell, you are seeing the absolute path of your home directory. Because `Desktop` is a folder within your home directory, and the absolute path to your home directory is `/Users/lucy` or `/home/lucy`, you could also list its contents with:
+>host:~ lucy$ **ls /Users/lucy/Desktop**
+
+or in Linux:
+>lucy@host:~$ **ls /home/lucy/Desktop**
+
+This command has the exact same results as the previous `ls Desktop` because it is showing the contents of the same folder, just specified in two different ways.
+
+**Windows**
+
+*Windows 10*
+
+If you are using WSL or Cygwin, the root directory in the terminal is in a somewhat odd place compared with the filesystem. The root directory corresponds to a Windows directory deeply hidden somewhere in `C:\Users\<username>\AppData\...` for WSL and `C:\cygwin` for Cygwin. Conversely, the Windows root directory `C:\` is available from the shell environment as `/mnt/c` (WSL) or `/cygdrive/c` (Cygwin).
+
+*Windows 11*
+
+In the newest Windows version, the root directory of the terminal is shown in the filesystem (File Explorer) as a separate folder (Linux).
+
+In the following examples, the bold characters are what you type, and the regular characters are what the system prints, and we may or may not show the prompt that begins each line. In place of `lucy` you’ll see your own username, and you will also see a different host name at the beginning of the line. This is your network identity, created when you first set up an account on your computer. 
+
+Type the command `ls` in your terminal window and you will see that there is not much to see in the Ubuntu or Cygwin home directory yet. We will copy the example files to here later on.
+>lucy@host:~$ **ls**
+
+With the Cygwin prompt it will look like this:
+>lucy@host ~
+
+>$ **ls**
+
+From now on the Cygwin prompt will only be shown if the command is different.
+
+To see the absolute path of the working directory, use the command `pwd` (`p`rint `w`orking `d`irectory):
+>lucy@host:~$ **pwd**
+
+>/home/lucy
+
+Since you haven’t moved anywhere since starting the shell, you are seeing the absolute path of your home directory. To see the contents of another directory than the working directory you provide the path to that directory behind the ls command. For comparison, open File Explorer and navigate to your `Documents` folder, so you can see its content. Now do the same by typing the following command in your terminal window and compare the output with what you see in the familiar `File Explorer`. You should see the same folders and files in both. Note that instead of `lucy` you should fill in your **Windows** username. This can be seen in `File Explorer` by checking the content of the directory `C:\Users`.
+>lucy@host:~$ **ls /mnt/c/Users/lucy/Documents**
+
+or with Cygwin:
+>lucy@host ~
+
+>$ **ls /cygdrive/c/Users/lucy/Documents**
 
