@@ -133,3 +133,134 @@ or with Cygwin:
 
 >$ **ls /cygdrive/c/Users/lucy/Documents**
 
+### 3.2. How to move around with `cd`
+
+**MacOS and Linux (for Windows go to next paragraph)**
+
+To move to another directory, use the command `cd` (`c`hange `d`irectory). Move inside your `Desktop` directory by typing
+>host:~ lucy$ **cd Desktop**
+
+>host:Desktop lucy$
+
+Notice that the prompt changes from `host:~ lucy$` to `host:Desktop lucy$`, showing the name of the new working directory. On a Linux system the path component of the prompt will be expanded, showing the complete path.
+
+You will need to keep in mind that capitalization generally counts in all types of Unix. Getting the capitalization of a command wrong can be as bad as misspelling it. This capitalization behaviour is hard to predict, though, so you should not rely on it to distinguish similarly named files.
+To see the contents of the `Desktop` directory, but this time from within the directory, you can now type `ls` by itself:
+>host:Desktop lucy$ **ls**
+
+From here, if you type `ls Desktop`, you will generate an error, because there is no `Desktop` folder within your `Desktop` folder (unless you have created one).
+>host:Desktop lucy$ **ls Desktop**
+
+>ls: Desktop: No such file or directory
+
+The same error happens when you try this, but for a different reason:
+>host:Desktop lucy$ **ls /Desktop**
+
+>ls: /Desktop: No such file or directory
+
+To move back towards the root in the directory structure (see Figure 2), more specifically to the parent directory of the working directory, use the command:
+>host:Desktop lucy$ **cd ..**
+
+Make sure to include a space between the `cd` and the two dots. This command won’t return any feedback after the prompt. However, since the prompt by default shows a shortened version of your current working directory, it will again change your new location.
+
+The two dots in the command indicate the folder that contains the current folder. This is just another type of relative path. This will always move you from the current working directory to the directory which contains it – unless, of course, you are in the root directory, which is absolute and contained by nothing.
+
+The `..` symbol can be used in conjunction with other directory names. This allows you to
+move with a single command from one directory to another that is sister to it in the hierarchy. For example, if you want to go from your `Desktop` directory to your `Documents` folder, this is equivalent to backing out one level and then moving one level into a different but parallel directory relative to where you started (see Figure 2). First, go back to the `Desktop` folder and then go in one command to the `Documents` folder:
+>host:~ lucy$ **cd Desktop**
+>
+>host:Desktop lucy$ **pwd**
+
+>/Users/lucy/Desktop
+
+>host:Desktop lucy$ **cd ../Documents**
+>
+>host:Documents lucy$ **pwd**
+
+>/Users/lucy/Documents
+
+From `Documents` you can type `cd ..` to go back to the home directory again. Note that you can use `..` more than once in a command. For example, `cd ../..` will send you back two directories in one step.
+>host:Documents lucy$ **cd ..**
+>
+>host:~ lucy$ **pwd**
+
+>/Users/lucy
+
+>host:~ lucy$ **cd ../..**
+>
+>host:/ lucy$ **pwd**
+
+>/
+
+**Windows**
+
+To move to another directory, use the command cd (change directory). Move inside your Windows home directory by typing:
+>lucy@host:~$ **cd /mnt/c/Users/lucy**
+
+>lucy@host:/mnt/c/Users/lucy$
+
+or
+
+>lucy@host ~
+>
+>$ **cd /cygdrive/c/Users/lucy**
+
+>lucy@host /cygdrive/c/Users/lucy
+>
+>$
+
+Notice that the prompt changes from `lucy@host:~$` to `lucy@host:/mnt/c/Users/lucy$`, showing the name of the new working directory.
+
+You will need to keep in mind that capitalization generally counts in all types of Unix. Getting the capitalization of a command wrong can be as bad as misspelling it. This capitalization behaviour is hard to predict, though, so you should not rely on it to distinguish similarly named files.
+
+To see the contents of the `Desktop` folder while sitting in your home directory, type:
+>lucy@host:/mnt/c/Users/lucy$ **ls Desktop**
+
+Without anything before `Desktop`, `ls` expects that `Desktop` is a directory within the working directory. This is a relative path to `Desktop`, because it is in relation to where you are now. Upon executing the command, you should see a list of whatever files are stored on your `Desktop` at the moment.
+
+Because `Desktop` is a folder within your Windows home directory, and the absolute path to your Windows home directory is `/mnt/c/Users/lucy`, you could also list its contents with:
+>lucy@host:/mnt/c/Users/lucy$ **ls /mnt/c/Users/lucy/Desktop**
+
+This command has the exact same results as the previous `ls Desktop` because it is showing the contents of the same folder, just specified in two different ways.
+
+Move inside your `Desktop` directory by typing
+>lucy@host:/mnt/c/Users/lucy$ **cd Desktop**
+
+To see the contents of the `Desktop` directory, but this time from within the directory, you can now type `ls` by itself:
+>lucy@host:/mnt/c/Users/lucy/Desktop$ **ls**
+
+From here, if you type `ls Desktop`, you will generate an error, because there is no `Desktop` folder within your Desktop folder (unless you have created one).
+>lucy@host:/mnt/c/Users/lucy/Desktop$ **ls Desktop**
+
+>ls: Desktop: No such file or directory
+
+The same error happens when you try this, but for a different reason:
+>lucy@host:/mnt/c/Users/lucy/Desktop$ **ls /Desktop**
+
+>ls: /Desktop: No such file or directory
+
+To move back towards the root in the directory structure (see Figure 2), more specifically to the parent directory of the working directory, use the command:
+>lucy@host:/mnt/c/Users/lucy/Desktop$ **cd ..**
+
+Make sure to include a space between the `cd` and the two dots. This command won’t return any feedback after the prompt. However, since the prompt by default shows a shortened version of your current working directory, it will again change your new location. 
+
+The two dots in the command indicate the folder that contains the current folder. This is just another type of relative path. This will always move you from the current working directory to the directory which contains it – unless, of course, you are in the root directory, which is absolute and contained by nothing.
+
+The `..` symbol can be used in conjunction with other directory names. This allows you to move with a single command from one directory to another that is sister to it in the hierarchy. For example, if you want to go from your `Desktop` directory to your `Downloads` folder, this is equivalent to backing out one level and then moving one level into a different but parallel directory relative to where you started (see Figure 2).
+
+First, go back to the `Desktop` folder and then go in one command to the `Downloads` folder:
+>lucy@host:/mnt/c/Users/lucy$ **cd Desktop**
+>
+>lucy@host:/mnt/c/Users/lucy/Desktop$ **cd ../Downloads**
+
+>lucy@host:/mnt/c/Users/lucy/Downloads$
+
+From `Downloads` you can type `cd ..` to go back to the home directory again. Note that you can use `..` more than once in a command. For example, `cd ../..` will send you back two directories in one step.
+>lucy@host:/mnt/c/Users/lucy/Downloads$ **cd ..**
+>
+>lucy@host:/mnt/c/Users/lucy$ **cd ../..**
+>
+>lucy@host:/mnt/c$ **cd ../..**
+
+>lucy@host:/ $
+
