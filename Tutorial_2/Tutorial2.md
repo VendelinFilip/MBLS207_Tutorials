@@ -273,13 +273,13 @@ This is equivalent to typing the absolute path, specified all the way from root:
 
 See what happens when you try the following commands (use the pwd command after each
 one to confirm the results):
->$ cd /
+>$ **cd /**
 >
->$ cd ~
+>$ **cd ~**
 >
->$ cd /
+>$ **cd /**
 >
->$ cd
+>$ **cd**
 
 You should find that `cd` and `cd ~` do the same thing, i.e., they take you back to your home directory. Typing `cd` is a very quick way to get there.
 
@@ -289,3 +289,183 @@ You should find that `cd` and `cd ~` do the same thing, i.e., they take you back
 So far, we’ve discussed moving around the filesystem, but you have been a fly on the wall and have not actually done anything to affect the filesystem in your travels. One basic modification you can make to your filesystem is to add a directory – a task accomplished with the command `mkdir` (`m`a`k`e `dir`ectory).
 
 The following sequence of commands will make a folder called `test` in the `sandbox` folder you installed along with the `examples` folder. While you do these operations, it is illustrative to have a graphical browser window open in `Finder` or `File Explorer` with the contents of the `pcfb/sandbox` folder showing. Go to the same directory in the terminal. You should have placed the `pcfb` folder in your home directory (note that it therefore will be in `/mnt/c/Users/lucy/pcfb/sandbox` or `/cygdrive/c/Users/lucy/pcfb/sandbox` for Windows users). The ls commands give a before and after view of the changes resulting from `mkdir`:
+
+>host:sandbox lucy$ **ls**
+>
+>host:sandbox lucy$ **mkdir test**
+>
+>host:sandbox lucy$ **ls**
+
+>test
+
+>host:sandbox lucy$ **cd test**
+>
+>host:test lucy$ **ls**
+>
+>host:test lucy$ **cd ..**
+>
+>host:sandbox lucy$ **ls**
+
+>test
+
+After the `mkdir` command is issued, you find a new directory has been created called test. If you look at your sandbox folder using the `Finder / File Explorer` (remember that GUI you used to use?) you should also see it there, represented by a new folder of the same name. In the last few commands, you simply moved into the new directory, looked around (there was nothing there to see since you hadn’t put any files in it), and moved back out. Next you get rid of the empty directory with the command `rmdir` (`r`e`m`ove `dir`ectory):
+
+>host:sandbox lucy$ **rmdir test**
+>
+>host:sandbox lucy$ **ls**
+
+**Warning**
+
+You can see that test is now gone. By default, `rmdir` is conservative in that it only removes empty directories. The equivalent to `rmdir` for deleting files is `rm`. Use caution with `rmdir` and even more so with `rm`. These commands are not like putting something in the `Trash`, where you can pull it out later. Files deleted this way are gone and cannot be recovered. We will explore `rm` later after we have built in a check to prevent accidents.
+
+### 4.2. Creating and copying files: `touch` and `cp`
+
+The following sections will deal with commands that help us to work with files, i.e., copy files to/from places, move files, rename files, remove files, and most importantly, look at files. First, we need to have some files to play with. The command `touch` will let us create a new, empty file. The `touch` command does other things too, but for now we just want a file to work with. If you still have the GUI open, you will see a new file appear.
+
+>host:sandbox lucy$ **touch original.txt**
+>
+>host:sandbox lucy$ **ls**
+
+>original.txt
+
+The command to copy a file is `cp` (copy). It is followed by the file’s present name and location (known as the source) and the location where you would like the copy to end up (known as the destination). In the following example, the source is the file we’ve just created and the destination is an identical file but with a different name:
+>host:sandbox lucy$ **cp original.txt duplicate.txt**
+>
+>host:sandbox lucy$ **ls**
+
+>duplicate.txt original.txt
+
+You can use `cp` to copy a file within the same directory, giving the new file a new name, as we just did. You can also copy a file to another directory, either giving it a new name or retaining the old name. If you only specify a path to a directory for the destination, without an actual filename, then the file will be copied to that directory with its original name.
+
+Remember that the command option consisting of two periods (`..`) refers to the directory that contains the current working directory. Similarly, a single period (`.`) represents the current working directory itself, which is useful if you want to copy a file from elsewhere to the working directory. Let’s copy a file from the examples folder to the sandbox folder.
+
+>$ **cp ../examples/reflist.txt .**
+>
+>$ **ls**
+
+>duplicate.txt  original.txt  reflist.txt
+
+When moving or copying a file, by default the shell will not warn you if a file or folder of the same name exists in the destination directory. If a file of the same name does exist, it will get “clobbered” – that is, deleted and replaced without warning or notification. You may not realize this until much later when you go looking for the original file. Later, you will see how to modify this behaviour.
+
+### 4.3. Moving files:`mv`
+
+The command for moving files is `mv` (move). You move files in the exact same way that you copy them, except that the original file disappears in the process. In the following example, you move the reflist.txt file to a new directory:
+>$ **mkdir Temp**
+>
+>$ **mv reflist.txt Temp**
+>
+>$ **ls**
+
+>Temp duplicate.txt original.txt
+
+>$ **ls Temp**
+
+>reflist.txt
+
+The command `mv` is also used for renaming files, since renaming a file is equivalent to moving it to a new file with a different name in the same directory.
+
+>$ **mv duplicate.txt duplicate_renamed.txt**
+>
+>$ **ls**
+
+>Temp duplicate_renamed.txt original.txt
+
+>$ **mv duplicate_renamed.txt Temp/duplicate.txt**
+>
+>$ **mv Temp Temp2**
+>
+>$ **mkdir Temp3**
+>
+>$ **mv Temp3 Temp2**
+>
+>$ **ls**
+
+>Temp2 original.txt
+
+>$ **ls Temp2**
+
+>Temp3 duplicate.txt reflist.txt
+
+You will see that with one command you can also both rename and move a file and that you can use `mv` also on folders. Note the difference in outcome between the `mv Temp Temp2` and `mv Temp3 Temp2` commands. Later, you will see how to quickly move or copy multiple files at once.
+
+## 5. Powering up: shortcuts and options
+
+### 5.1. Command line shortcuts
+
+#### 5.1.1. Up arrow
+
+It is not too soon to introduce two shell shortcuts that will save you a lot of typing. Try to get into the habit of using these, because they will not only save you time, but will also reduce the number of typographical errors you have to correct.
+
+The first shortcut is the `↑` key. In most shells, the `↑` moves back through your previous command history. For example, if you type in a long command and hit `Enter`, only to realize that you were in the wrong directory for the command to do what you wish, you can easily move to the correct directory, press `↑` one or more times until you see the correct command, and then hit `Enter` again to execute the command. Try pressing the `↑` key now to step back through and see all the commands that you have done so far. Pressing the `↓` key will get you back to more recent commands and even show future commands that you haven’t typed yet.
+
+Previous commands can also be edited before you re-execute them. If you enter a command but it has a typo somewhere in it, press `↑` to show it again, then use the `→` and `←` keys to move to the place where the error occurred, fix it and hit `Enter`. The cursor doesn’t have to be back at the end of line.
+
+When typing or editing a command, you can use `Ctrl+A` to go directly to the start of the line, `Ctrl+E` to go to the end, `Ctrl+←/→` or `⌥+←/→` to go to the previous/next word, `Ctrl+W` to delete the word left of the cursor, `Ctrl+U` to delete everything left of the cursor and `Ctrl+K` to delete everything right of the cursor. Try these shortcuts with one of your previous commands. If you are in the middle of a command and wish to start over, typing `Ctrl+C` will clear the line. This key sequence is a universal way to interrupt a program or process.
+
+#### 5.1.2. Tab
+
+Another big time-saver is the `tab` key. This is in effect the auto-completion button for the command line. For example, go to the parent `pcfb` directory and start typing:
+>$ **cd sand**
+
+Then, press `tab`. The command line should fill in the remainder of the word `sandbox` and append a trailing slash. Now try this command:
+>$ cd s *[tab]*
+
+You should get a beep or a blank stare from your terminal. This is because there is more than one folder starting with `s` in the `pcfb` directory. The shell can’t tell if you are referring to the `sandbox`, or the `scripts` folder. To see what the choices are, press tab again. The terminal will return a list of the matches to what you have typed so far. If nothing shows up, check where you are and check for incorrect other characters at the beginning, to make sure you haven’t entered the start of a path that doesn’t exist.
+
+Completion of directory and filenames is especially convenient when the name has a space in it. If you try to type a command with a space in it, such as `cd My Project`, the shell thinks that there are two different pieces of information (arguments) being sent to the `cd` command. Since you probably don’t have a directory called `My`, it returns an error.
+
+When you use tab auto-completion in his context, the shell types the command with extra backslashes inserted before the spaces. Remember from the previous tutorial on searching and replacing with regular expressions that a backslash (`\`) modifies the interpretation of the character that follows. In this case, it causes the shell to interpret the space as part of the filename rather than as the separation between two filenames. You don’t need autocompletion to take advantage of `\`. You can also type it in yourself as part of the path.
+
+Spaces can also be accommodated in file or directory names by using either single or double quotes to enclose the full path, including spaces. However, you cannot do so if you are
+trying to use the tilde shortcut or wildcards (discussed later) as part of the path, since they won’t be expanded.
+
+It is generally best to just AvoidUsingSpacesAltogether when naming data files and scripts. This will make things easier later on. Other punctuation marks in names (`?`,`;`,`/`) have special meanings at the command line, and should therefore be avoided as well. Underscores are acceptable to use.
+
+### 5.2. Wildcards in path description
+
+So far you have not done much that you could not have accomplished just as easily (or maybe more easily) with a graphical user interface. It is **wildcards** that makes the command line more powerful than a GUI for processing many files in one operation.
+
+For example, to list all the files and folders that begin with `s` in the `pcfb` directory, as well as the contents of those directories, you could type:
+>$ **ls ../s\***
+
+To list just files ending in `.txt`, you could type:
+>$ **ls ../examples/\*.txt**
+
+You can use several wildcards in the path. So to list all files and directories that start with a `c` within all directories that you have installed from the book, you can type:
+
+>$ **ls ../\*/c\***
+
+>../examples/chart.html ../examples/ctd.txt
+>
+>../examples/chart.php ../examples/ctd237e6.asc
+>
+>../examples/chart0.php ../examples/curlexamples.txt
+>
+>../examples/chartform.php ../scripts/compositioncalc1.py
+>
+>../examples/ctd.rtf ../scripts/compositioncalc2.py
+>
+>../examples/ctd:
+>
+>Marrus_ctdTib515.txt Marrus_ctdVen1777.txt o_ctdTib626.txt
+>
+>Marrus_ctdTib531.txt Marrus_ctdVen2243.txt o_ctdTib834.txt
+>
+>Marrus_ctdTib547.txt midwater.sql o_ctdTib965.txt
+>
+>Marrus_ctdTib596.txt midwater2.sql o_ctdTib985.txt
+>
+>Marrus_ctdVen1575.txt o_ctdTib598.txt o_ctdTib989.txt
+
+Notice that the asterisk doesn’t include text beyond the path divider (`/`). Therefore, `ls ../\*c\*` is not equivalent to the command above. In fact, it will show the content of the `scripts` directory.
+
+When using wildcards, if `ls` finds a file that matches, it lists the filename; if it finds a directory that matches, it lists the directory along with its contents.
+
+Another wildcard is the question mark. Try to figure out its meaning:
+>$ **touch fat fit feet**
+>
+>$ **ls f\*t**
+>
+>$ **ls f?t**
+>
+>$ **ls f??t**
