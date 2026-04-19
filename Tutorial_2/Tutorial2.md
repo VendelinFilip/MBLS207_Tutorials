@@ -264,3 +264,28 @@ From `Downloads` you can type `cd ..` to go back to the home directory again. No
 
 >lucy@host:/ $
 
+### 3.3. Signifying the home directory with ~
+A shortcut for referring to your home directory is the tilde symbol (~). This is also shown in the prompt, when you are in your home directory. So, for instance, no matter where you are on the system, you can type the following command to jump straight to the Documents folder in your home directory (this of course only works if you have a Documents directory there, so it won’t work for Windows users; be patient, we’ll add some files in your Ubuntu home directory later on):
+>host:/ lucy$ **cd ~/Documents**
+
+This is equivalent to typing the absolute path, specified all the way from root:
+>host:Documents lucy$ **cd /Users/lucy/Documents**
+
+See what happens when you try the following commands (use the pwd command after each
+one to confirm the results):
+>$ cd /
+>
+>$ cd ~
+>
+>$ cd /
+>
+>$ cd
+
+You should find that `cd` and `cd ~` do the same thing, i.e., they take you back to your home directory. Typing `cd` is a very quick way to get there.
+
+## 4. Basic manipulation of folders and files
+
+### 4.1. Adding and removing directories with `mkdir` and `rmdir`
+So far, we’ve discussed moving around the filesystem, but you have been a fly on the wall and have not actually done anything to affect the filesystem in your travels. One basic modification you can make to your filesystem is to add a directory – a task accomplished with the command `mkdir` (`m`a`k`e `dir`ectory).
+
+The following sequence of commands will make a folder called `test` in the `sandbox` folder you installed along with the `examples` folder. While you do these operations, it is illustrative to have a graphical browser window open in `Finder` or `File Explorer` with the contents of the `pcfb/sandbox` folder showing. Go to the same directory in the terminal. You should have placed the `pcfb` folder in your home directory (note that it therefore will be in `/mnt/c/Users/lucy/pcfb/sandbox` or `/cygdrive/c/Users/lucy/pcfb/sandbox` for Windows users). The ls commands give a before and after view of the changes resulting from `mkdir`:
